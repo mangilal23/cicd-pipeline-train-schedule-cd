@@ -12,9 +12,9 @@ agent any
             when {
             branch 'master'
             }
-                steps{
+                steps {
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', passwordVariable: 'USERPASS', usernameVariable: 'USERNAME')]) {
-                sshPublisher 
+                sshPublisher(
                     failOnError: true, 
                     continueOnError: false,
                     publishers: [
@@ -32,12 +32,10 @@ agent any
                                     removePrefix: 'dist/', 
                                     sourceFiles: 'dist/trainSchedule.zip'
                                 )
-                            ], 
-                            usePromotionTimestamp: false, 
-                            useWorkspaceInPromotion: false, 
-                            verbose: false
+                            ]
                         )
                     ]
+                    )
 }
                 }
             }
