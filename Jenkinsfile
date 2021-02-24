@@ -5,7 +5,7 @@ agent any
             steps{
             echo "Running build automation"
                 sh './gradlew build --no-daemon'
-                archiveArtifacts artifacts: 'dist/trainSchedule.zip', followSymlinks: false
+                archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
         stage('Deploy Staging'){
