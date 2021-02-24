@@ -21,7 +21,7 @@ agent any
                         sshPublisherDesc(
                             configName: 'staging', 
                             sshCredentials: [
-                                encryptedPassphrase: '$USERAPSS', 
+                                encryptedPassphrase: '$USERPASS', 
                                 username: '$USERNAME'
                             ], 
                             transfers: [
