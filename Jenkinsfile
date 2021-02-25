@@ -43,8 +43,9 @@ agent any
                 when {
                 branch 'master'
                 }
-                input 'Have you tested application in staging environment ?'
                 steps{
+                    input 'Does the staging environment look OK?'
+                    milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', passwordVariable: 'USERPASS', usernameVariable: 'USERNAME')]) {
     // some block
                   sshPublisher(
