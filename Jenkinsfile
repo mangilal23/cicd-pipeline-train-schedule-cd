@@ -53,6 +53,11 @@ agent any
                       publishers: [
                           sshPublisherDesc(
                               configName: 'prod',
+                              sshCredentials: [
+                                username: "$USERNAME",
+                                encryptedPassphrase: "$USERPASS"
+                                
+                            ], 
                               transfers: [
                                   sshTransfer(
                                     
