@@ -39,6 +39,32 @@ agent any
                     )
 }
                 }
+            stage('Prod Deploy') {
+                when {
+                branch 'master'
+                }
+                input 'Have you tested application in staging environment ?'
+                steps{
+                withCredentials([usernamePassword(credentialsId: 'webserver_login', passwordVariable: 'USERPASS', usernameVariable: 'USERNAME')]) {
+    // some block
+                  sshPublisher(
+                      publishers: [
+                          sshPublisherDesc(
+                              configName: 'prod',
+                              transfers: [
+                                  sshTransfer(
+                                    
+                                      execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule',
+                                      remoteDirectory: '/tmp', 
+                                      removePrefix: 'dist/', 
+                                      sourceFiles: 'dist/trainSchedule.zip'
+                                  )
+                              ]
+                          )])  
+}
+                }
+            }
+            
             }
         }
     }
